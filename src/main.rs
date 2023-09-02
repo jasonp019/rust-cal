@@ -71,6 +71,30 @@ struct CalDate {
     day: u8,
 }
 
+// Thinking of using the following as the result of computing the month
+// layout and then can pass an array of CalendarMonths to the renderer
+// which then formats it to print to the display device
+struct CalendarMonth {
+    year: usize,
+    month: usize,
+    start_dow: usize,
+    last_day: usize,
+
+    /*
+     * days_ary is 2-d array holding the day numbers (0 = not valid;
+     *      >0 = day of the month); like the following:
+     *
+     * For September 2023 where the month starts on a Friday:
+     *
+     *  0,  0,  0,  0,  0,  1,  2
+     *  3,  4,  5,  6,  7,  8,  9
+     * 10, 11, 12, 13, 14, 15, 16
+     * 17, 18, 19, 20, 21, 22, 23
+     * 24, 25, 26, 27, 28, 29, 30
+    */
+    days_ary: [[usize; 7]; 6],
+}
+
 struct MonthFormatter {}
 
 lazy_static! {
